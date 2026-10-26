@@ -22,8 +22,18 @@ env:
 
 jobs:
   build:
-    name: Build companion UF2
+    name: Build ${{ matrix.artifact }}
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - preset: pico2-w-release
+            artifact: ds5-bridge-companion
+          - preset: waveshare-rp2350b-plus-w-release
+            artifact: ds5-bridge-companion-waveshare
+          - preset: waveshare-rp2350b-plus-w-oled-release
+            artifact: ds5-bridge-companion-waveshare-oled
 
     steps:
       - name: Checkout repository
@@ -76,54 +86,20 @@ jobs:
           git -C "$PICO_SDK_PATH/lib/tinyusb" checkout --detach "$TINYUSB_REF"
           test "$(git -C "$PICO_SDK_PATH/lib/tinyusb" rev-parse HEAD)" = "$TINYUSB_REF"
 
-      - name: Build companion firmware
+      - name: Configure Release firmware
+        run: cmake --preset "${{ matrix.preset }}" -DPICO_SDK_PATH="$PICO_SDK_PATH"
+
+      - name: Build Release firmware
+        run: cmake --build --preset "${{ matrix.preset }}" --parallel 2
+
+      - name: Package firmware
         run: |
-          cmake -S . -B build/companion -G Ninja \
-            -DCMAKE_BUILD_TYPE=Release \
-            -DPICO_SDK_PATH="$PICO_SDK_PATH" \
-            -DENABLE_COMPANION=ON
-          cmake --build build/companion --target ds5-bridge
           mkdir -p artifacts
-          cp build/companion/ds5-bridge.uf2 artifacts/ds5-bridge-companion.uf2
+          cp "build/${{ matrix.preset }}/ds5-bridge.uf2" "artifacts/${{ matrix.artifact }}.uf2"
 
-      - name: Build companion firmware (Waveshare RP2350B-Plus-W)
-        run: |
-          cmake -S . -B build/waveshare -G Ninja \
-            -DCMAKE_BUILD_TYPE=Release \
-            -DPICO_SDK_PATH="$PICO_SDK_PATH" \
-            -DENABLE_COMPANION=ON \
-            -DWAVESHARE_RP2350B_PLUS_W_BUILD=ON
-          cmake --build build/waveshare --target ds5-bridge
-          cp build/waveshare/ds5-bridge.uf2 artifacts/ds5-bridge-companion-waveshare.uf2
-
-      - name: Build OLED firmware (Waveshare RP2350B-Plus-W)
-        run: |
-          cmake -S . -B build/waveshare-oled -G Ninja \
-            -DCMAKE_BUILD_TYPE=Release \
-            -DPICO_SDK_PATH="$PICO_SDK_PATH" \
-            -DENABLE_COMPANION=ON \
-            -DENABLE_OLED=ON \
-            -DWAVESHARE_RP2350B_PLUS_W_BUILD=ON
-          cmake --build build/waveshare-oled --target ds5-bridge
-          cp build/waveshare-oled/ds5-bridge.uf2 artifacts/ds5-bridge-companion-waveshare-oled.uf2
-
-      - name: Upload companion UF2 artifact
+      - name: Upload UF2 artifact
         uses: actions/upload-artifact@v7
         with:
-          path: artifacts/ds5-bridge-companion.uf2
-          archive: false
-          if-no-files-found: error
-
-      - name: Upload Waveshare companion UF2 artifact
-        uses: actions/upload-artifact@v7
-        with:
-          path: artifacts/ds5-bridge-companion-waveshare.uf2
-          archive: false
-          if-no-files-found: error
-
-      - name: Upload Waveshare OLED companion UF2 artifact
-        uses: actions/upload-artifact@v7
-        with:
-          path: artifacts/ds5-bridge-companion-waveshare-oled.uf2
+          path: artifacts/${{ matrix.artifact }}.uf2
           archive: false
           if-no-files-found: error

@@ -11,15 +11,31 @@ This is the first, deliberately read-only OLED integration for DS5 Bridge. It do
 
 ## Build
 
-```bash
-cmake -S . -B build/waveshare-oled -G Ninja -DCMAKE_BUILD_TYPE=Release \\
-  -DENABLE_COMPANION=ON \\
-  -DWAVESHARE_RP2350B_PLUS_W_BUILD=ON \\
-  -DENABLE_OLED=ON
-cmake --build build/waveshare-oled --target ds5-bridge
+Set `PICO_SDK_PATH` to Pico SDK **2.3.0** and add ARM GNU Toolchain
+**15.2.Rel1** plus Ninja to `PATH`. Use the same TinyUSB revision as CI:
+`2d56dc533e45e4e91b15e93fdab5e22e964f328d`.
+
+From the repository root (Bash or PowerShell):
+
+```sh
+cmake --preset waveshare-rp2350b-plus-w-oled-release
+cmake --build --preset waveshare-rp2350b-plus-w-oled-release --parallel 2
 ```
 
-Firmware: `build/waveshare-oled/ds5-bridge.uf2`. GitHub Actions also publishes an OLED-specific UF2 artifact for this branch. The existing non-OLED artifact is unchanged.
+This preset enables `WAVESHARE_RP2350B_PLUS_W_BUILD=ON`,
+`ENABLE_OLED=ON`, `ENABLE_COMPANION=ON`, `CMAKE_BUILD_TYPE=Release`,
+and `DS5_DIAGNOSTICS_PRESET=off`. It uses its own build directory so
+cached Pico 2 W or non-OLED settings cannot select the wrong board.
+
+Local firmware: `build/waveshare-rp2350b-plus-w-oled-release/ds5-bridge.uf2`.
+
+For a downloadable build, open **Actions → Build firmware → Run workflow**,
+select branch `feature/optional-sh1107-oled` (or the branch containing this
+change), and run it. The three independent CI jobs verify Pico 2 W,
+Waveshare without OLED, and Waveshare with OLED. Download
+**`ds5-bridge-companion-waveshare-oled.uf2`** from the successful run.
+The other two files do not enable the display. This is an optimized
+Release build for hardware testing, not a published stable release.
 
 ## Behavior
 

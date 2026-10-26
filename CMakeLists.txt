@@ -39,6 +39,7 @@ if (EXISTS ${picoVscode})
 endif ()
 # ====================================================================================
 option(WAVESHARE_RP2350B_PLUS_W_BUILD "Build for Waveshare RP2350B-Plus-W (USB-C, 16MB flash, RM2 wireless)" OFF)
+option(ENABLE_OLED "Enable Waveshare Pico-OLED-1.3 (SH1107 SPI) status display" OFF)
 
 if (WAVESHARE_RP2350B_PLUS_W_BUILD)
     set(PICO_BOARD waveshare_rp2350b_plus_w CACHE STRING "Board type")
@@ -390,6 +391,13 @@ if(ENABLE_COMPANION)
     target_compile_definitions(ds5-bridge PRIVATE
             ENABLE_COMPANION
     )
+endif()
+
+# Optional SH1107 OLED, separate from USB/BT and Companion (off by default).
+if(ENABLE_OLED)
+    target_sources(ds5-bridge PRIVATE src/oled_status.cpp)
+    target_link_libraries(ds5-bridge hardware_spi)
+    target_compile_definitions(ds5-bridge PRIVATE ENABLE_OLED=1)
 endif()
 
 # Diagnostics live in one place. Quick presets:

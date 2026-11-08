@@ -37,8 +37,7 @@ Local firmware:
 - Waveshare: `build/waveshare-rp2350b-plus-w-oled-release/ds5-bridge.uf2`
 
 For a downloadable build, open **Actions → Build firmware → Run workflow**,
-select branch `feature/optional-sh1107-oled` (or the branch containing this
-change), and run it. The firmware CI builds four combinations in one job: Pico 2 W and Waveshare,
+select a branch containing this change and run it. The firmware CI builds four combinations in one job: Pico 2 W and Waveshare,
 each with and without OLED. Download **`ds5-bridge-companion-pico2-w-oled.uf2`**
 for Raspberry Pi Pico 2 W or **`ds5-bridge-companion-waveshare-oled.uf2`**
 for Waveshare. The standard non-OLED UF2 artifacts do not enable the display. This is an optimized

@@ -40,6 +40,14 @@
       "inherits": "firmware-release"
     },
     {
+      "name": "pico2-w-oled-release",
+      "displayName": "Raspberry Pi Pico 2 W + SH1107 OLED Release",
+      "inherits": "pico2-w-release",
+      "cacheVariables": {
+        "ENABLE_OLED": "ON"
+      }
+    },
+    {
       "name": "waveshare-rp2350b-plus-w-release",
       "displayName": "Waveshare RP2350B-Plus-W Release (companion ON)",
       "inherits": "firmware-release",
@@ -67,6 +75,13 @@
     {
       "name": "pico2-w-release",
       "configurePreset": "pico2-w-release",
+      "targets": [
+        "ds5-bridge"
+      ]
+    },
+    {
+      "name": "pico2-w-oled-release",
+      "configurePreset": "pico2-w-oled-release",
       "targets": [
         "ds5-bridge"
       ]

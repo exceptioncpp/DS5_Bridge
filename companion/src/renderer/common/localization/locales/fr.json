@@ -281,6 +281,7 @@
     "Disable haptics": "Désactiver le retour haptique",
     "Disable headphones": "Désactiver le casque",
     "Disable microphone": "Désactiver le micro",
+    "Disable power off on dock": "Désactiver l’arrêt sur la station de charge",
     "Disable rumble": "Désactiver les vibrations",
     "Disable speaker": "Désactiver le haut-parleur",
     "Disable Trigger Lab": "Désactiver le laboratoire des gâchettes",
@@ -295,6 +296,7 @@
     "Disconnected": "Déconnecté",
     "Discord": "Discord",
     "discord invite help server": "serveur d’aide et d’invitation Discord",
+    "dock cradle contact charging auto power off disable": "station socle contact charge arrêt automatique désactiver",
     "Double-click to create a custom color": "Double-cliquez pour créer une couleur personnalisée",
     "Down": "Bas",
     "Down Arrow": "Flèche bas",
@@ -450,6 +452,7 @@
     "Intensity": "Intensité",
     "interrupt handling": "la gestion des interruptions",
     "Joining Wi-Fi": "Connexion au Wi-Fi",
+    "Keep the controller on when placed on a contact charging dock (power-off is enabled by default)": "Garder la manette allumée lorsqu’elle est placée sur une station de charge à contacts (l’arrêt est activé par défaut)",
     "Key": "Touche",
     "Keyboard Key": "Touche du clavier",
     "Keyboard modifiers": "Touches de modification du clavier",
@@ -970,9 +973,6 @@
     "Xbox": "Xbox",
     "Xbox Series X Mode": "Mode Xbox Series X",
     "Yellow": "Jaune",
-    "Your purchase supports the developer of DS5 Bridge.": "Votre achat soutient le développeur de DS5 Bridge.",
-    "Disable power off on dock": "Désactiver l’arrêt sur la station de charge",
-    "Keep the controller on when placed on a contact charging dock (power-off is enabled by default)": "Garder la manette allumée lorsqu’elle est placée sur une station de charge à contacts (l’arrêt est activé par défaut)",
-    "dock cradle contact charging auto power off disable": "station socle contact charge arrêt automatique désactiver"
+    "Your purchase supports the developer of DS5 Bridge.": "Votre achat soutient le développeur de DS5 Bridge."
   }
 }

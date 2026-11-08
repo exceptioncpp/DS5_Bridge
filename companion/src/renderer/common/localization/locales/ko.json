@@ -281,6 +281,7 @@
     "Disable haptics": "햅틱 비활성화",
     "Disable headphones": "헤드폰 비활성화",
     "Disable microphone": "마이크 비활성화",
+    "Disable power off on dock": "충전 거치대 자동 전원 끄기 비활성화",
     "Disable rumble": "진동 비활성화",
     "Disable speaker": "스피커 비활성화",
     "Disable Trigger Lab": "트리거 랩 비활성화",
@@ -295,6 +296,7 @@
     "Disconnected": "연결 끊김",
     "Discord": "Discord",
     "discord invite help server": "Discord 초대 도움말 서버",
+    "dock cradle contact charging auto power off disable": "거치대 접점 충전 자동 전원 끄기 비활성화",
     "Double-click to create a custom color": "두 번 클릭하여 사용자 지정 색상을 만드세요",
     "Down": "아래",
     "Down Arrow": "아래쪽 화살표",
@@ -450,6 +452,7 @@
     "Intensity": "강도",
     "interrupt handling": "인터럽트 처리",
     "Joining Wi-Fi": "Wi-Fi 연결 중",
+    "Keep the controller on when placed on a contact charging dock (power-off is enabled by default)": "접점식 충전 거치대에 놓아도 컨트롤러 전원을 유지합니다 (기본적으로 자동 전원 끄기가 활성화됩니다)",
     "Key": "키",
     "Keyboard Key": "키보드 키",
     "Keyboard modifiers": "키보드 보조 키",
@@ -970,9 +973,6 @@
     "Xbox": "Xbox",
     "Xbox Series X Mode": "Xbox Series X 모드",
     "Yellow": "노란색",
-    "Your purchase supports the developer of DS5 Bridge.": "구매하시면 DS5 Bridge 개발자를 후원하게 됩니다.",
-    "Disable power off on dock": "충전 거치대 자동 전원 끄기 비활성화",
-    "Keep the controller on when placed on a contact charging dock (power-off is enabled by default)": "접점식 충전 거치대에 놓아도 컨트롤러 전원을 유지합니다 (기본적으로 자동 전원 끄기가 활성화됩니다)",
-    "dock cradle contact charging auto power off disable": "거치대 접점 충전 자동 전원 끄기 비활성화"
+    "Your purchase supports the developer of DS5 Bridge.": "구매하시면 DS5 Bridge 개발자를 후원하게 됩니다."
   }
 }

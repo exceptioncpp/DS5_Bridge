@@ -970,6 +970,9 @@
     "Xbox": "Xbox",
     "Xbox Series X Mode": "Xbox Series X 模式",
     "Yellow": "黄色",
-    "Your purchase supports the developer of DS5 Bridge.": "你的购买将支持 DS5 Bridge 的开发者。"
+    "Your purchase supports the developer of DS5 Bridge.": "你的购买将支持 DS5 Bridge 的开发者。",
+    "Disable power off on dock": "禁用充电底座自动关机",
+    "Keep the controller on when placed on a contact charging dock (power-off is enabled by default)": "放入触点式充电底座时保持控制器开启（默认启用自动关机）",
+    "dock cradle contact charging auto power off disable": "充电底座 触点 充电 自动关机 禁用"
   }
 }

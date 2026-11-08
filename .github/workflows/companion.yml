@@ -53,18 +53,18 @@ jobs:
 
       # Only on the dock test PR; regular Companion checks remain lightweight.
       - name: Set up ARM toolchain for dock test installer
-        if: github.event_name == 'pull_request' && github.head_ref == 'feature/dock-auto-poweroff-optout'
+        if: github.event_name == 'pull_request' && (github.head_ref == 'feature/dock-auto-poweroff-optout' || github.head_ref == 'integration/oled-dock-waveshare-runtime')
         uses: carlosperate/arm-none-eabi-gcc-action@v1.12.3
         with:
           release: '15.2.Rel1'
 
       - name: Install Ninja for dock test installer
-        if: github.event_name == 'pull_request' && github.head_ref == 'feature/dock-auto-poweroff-optout'
+        if: github.event_name == 'pull_request' && (github.head_ref == 'feature/dock-auto-poweroff-optout' || github.head_ref == 'integration/oled-dock-waveshare-runtime')
         shell: pwsh
         run: choco install ninja -y --no-progress
 
       - name: Install Pico SDK for dock test installer
-        if: github.event_name == 'pull_request' && github.head_ref == 'feature/dock-auto-poweroff-optout'
+        if: github.event_name == 'pull_request' && (github.head_ref == 'feature/dock-auto-poweroff-optout' || github.head_ref == 'integration/oled-dock-waveshare-runtime')
         shell: pwsh
         env:
           PICO_SDK_PATH: ${{ github.workspace }}/pico-sdk
@@ -84,14 +84,14 @@ jobs:
           }
 
       - name: Build Windows dock test installer
-        if: github.event_name == 'pull_request' && github.head_ref == 'feature/dock-auto-poweroff-optout'
+        if: github.event_name == 'pull_request' && (github.head_ref == 'feature/dock-auto-poweroff-optout' || github.head_ref == 'integration/oled-dock-waveshare-runtime')
         working-directory: companion
         env:
           PICO_SDK_PATH: ${{ github.workspace }}/pico-sdk
         run: npm run installer:win
 
       - name: Upload Windows dock test installer
-        if: github.event_name == 'pull_request' && github.head_ref == 'feature/dock-auto-poweroff-optout'
+        if: github.event_name == 'pull_request' && (github.head_ref == 'feature/dock-auto-poweroff-optout' || github.head_ref == 'integration/oled-dock-waveshare-runtime')
         uses: actions/upload-artifact@v4
         with:
           name: DS5-Bridge-Companion-Dock-Test-Windows

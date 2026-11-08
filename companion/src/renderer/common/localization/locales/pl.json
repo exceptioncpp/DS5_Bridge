@@ -970,6 +970,9 @@
     "Xbox": "Xbox",
     "Xbox Series X Mode": "Tryb Xbox Series X",
     "Yellow": "Żółty",
-    "Your purchase supports the developer of DS5 Bridge.": "Twój zakup wspiera twórcę DS5 Bridge."
+    "Your purchase supports the developer of DS5 Bridge.": "Twój zakup wspiera twórcę DS5 Bridge.",
+    "Disable power off on dock": "Wyłącz automatyczne wyłączanie w stacji",
+    "Keep the controller on when placed on a contact charging dock (power-off is enabled by default)": "Pozostaw kontroler włączony po umieszczeniu w stacji ładowania stykowego (domyślnie wyłączanie jest włączone)",
+    "dock cradle contact charging auto power off disable": "stacja podstawka styki ładowanie automatyczne wyłączanie wyłącz"
   }
 }

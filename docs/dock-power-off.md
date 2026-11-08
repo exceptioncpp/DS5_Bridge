@@ -8,14 +8,16 @@ This is **not** equivalent to the battery charging state or USB-C power.
   input reports spaced at most 750 ms apart), the bridge sends the actual
   controller's Bluetooth power-off feature report (0x08, value 0x02).
 - The detector resets on dock removal, a stale input stream, Bluetooth
-  disconnection, or if the opt-out is set. It emits at most one shutdown
+  disconnection, or when the option is turned off. It emits at most one shutdown
   request for each continuous dock.
-- Companion: **Settings → Connection & Power → Disable power off on dock**.
+- Companion: **Settings → Connection & Power → Power off on charging dock**.
   Enable the switch to prevent automatic shutdown.
-- The opt-out is saved by **Companion on the PC** and reapplied when it
+- This enabled-by-default preference is saved by **Companion on the PC** and reapplied when it
   reconnects to the bridge, consistent with existing Companion settings.
   The controller normally powers off **without Companion running**.
-  After a Pico reboot with Companion closed, the default enabled behavior
+  Previously saved `disableDockPowerOff` preferences are migrated with inverse polarity
+  so that upgrading Companion does not silently change a user's choice.
+  After a Pico reboot with Companion closed, the default ON behavior
   resumes until Companion reconnects. This setting is NOT stored in RP2350
   flash.
 - A third-party cradle must actually assert DockDetect. Charging status
@@ -28,11 +30,11 @@ This is **not** equivalent to the battery charging state or USB-C power.
 3. With the powered **contact cradle**, place Edge inside. After about 2
    seconds the controller should power off, preserving Bluetooth pairing.
 4. Lift Edge, press PS, verify reconnection.
-5. To test the opt-out, run **Companion built from this PR** (the Companion
+5. To test the setting, run **Companion built from this PR** (the Companion
    checks workflow builds the app, or use the repo's documented build process).
-   Enable `Disable power off on dock`, then place Edge in the cradle again:
+   Turn **Power off on charging dock** OFF, then place Edge in the cradle again:
    it must stay on.
-6. Turn the opt-out back off to restore auto power-off.
+6. Turn the setting ON to restore automatic power-off.
 
 The original awalol/DS5Dongle disconnects the Bluetooth link on docking.
 This fork uses `bt_power_off_controller()` instead to prevent automatic

@@ -1132,7 +1132,7 @@ function registerIpc(service: BridgeService): void {
     service.setLightbarRestoreEnabled(value)
   ));
   ipcMain.handle('bridge:setIdleDisconnectEnabled', (_event, value: boolean) => service.setIdleDisconnectEnabled(value));
-  ipcMain.handle('bridge:setDisableDockPowerOff', (_event, value: boolean) => service.setDisableDockPowerOff(value));
+  ipcMain.handle('bridge:setPowerOffOnDock', (_event, value: boolean) => service.setPowerOffOnDock(value));
   ipcMain.handle('bridge:setIdleDisconnectTimeoutMinutes', (_event, value: number) => (
     service.setIdleDisconnectTimeoutMinutes(value)
   ));

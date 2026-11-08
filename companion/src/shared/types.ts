@@ -110,7 +110,7 @@ export interface CompanionSettings {
   ledEnabled: boolean;
   playerLedEnabled: boolean;
   idleDisconnectEnabled: boolean;
-  disableDockPowerOff: boolean;
+  powerOffOnDock: boolean;
   idleDisconnectTimeoutMinutes: number;
   usbSuspendDisconnectEnabled: boolean;
   wakeOnConnectEnabled: boolean;

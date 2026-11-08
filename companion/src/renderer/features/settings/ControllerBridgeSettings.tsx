@@ -82,11 +82,11 @@ export function ConnectionPowerSettings({ model, actions, matchingSettingIds }: 
     </SearchableSetting>
     <SearchableSetting id="dock-power-off" matchingSettingIds={matchingSettingIds}>
       <ToggleRow
-        label="Disable power off on dock"
-        description="Keep the controller on when placed on a contact charging dock (power-off is enabled by default)"
-        checked={settings.disableDockPowerOff}
+        label="Power off on charging dock"
+        description="Automatically power off the controller after 2 seconds on a contact charging dock."
+        checked={settings.powerOffOnDock}
         disabled={!model.connected || model.busy}
-        onToggle={actions.toggleDisableDockPowerOff}
+        onToggle={actions.togglePowerOffOnDock}
       />
     </SearchableSetting>
     <SearchableSetting id="pc-sleep-disconnect" matchingSettingIds={matchingSettingIds}>

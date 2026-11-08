@@ -1,47 +1,58 @@
-# Hardware updates adapted from upstream PR #118
+# Waveshare hardware-specific adaptation of upstream PR #118
 
-Source: https://github.com/SundayMoments/DS5_Bridge/pull/118
-Commit reviewed: `e205121a07cf1f451cc2e094faf2cb7850716160`
+Original contribution: https://github.com/SundayMoments/DS5_Bridge/pull/118
+Reviewed revision: `e205121a07cf1f451cc2e094faf2cb7850716160`
 
-The original PR targets an older DS5 Bridge architecture, while current
-main has heavily rewritten USB, BTstack and persona management. Applying
-all six files from PR #118 verbatim would regress the newer implementation.
+This is an intentionally narrow, hardware-focused adaptation of that
+contribution for the current DS5 Bridge main branch. It is **not** a replacement
+for or a complete implementation of the original PR. Keeping flash/board
+metadata independent from USB transport changes makes review, regression
+testing, and possible rollback more predictable.
 
-## Changes retained
-- Waveshare RP2350B-Plus-W: `PICO_FLASH_SIZE_BYTES` is declared using
-  `pico_board_cmake_set_default` for the actual 16 MiB flash part.
-- LED2 on the RP2350B is exposed as default GPIO23; LED1 is still CYW43 GPIO0.
-- Bluetooth TLV storage uses hardware-tested low-flash bank offset
-  `0x003FD000` on Waveshare only; Pico 2 W remains unchanged.
+## Changes retained from #118
 
-## Current-main features that supersede the older PR
-- `src/bt.cpp` now has fixed-size `std::array<feature_cache_entry>`
-  with `ds5::InlineBytes`, and `bt_copy_feature_data()`.
-- `src/main.cpp` uses `bt_copy_feature_data()` in USB HID GET_REPORT
-  rather than dynamically allocating a vector in the callback.
-- Bluetooth input is transferred through bounded receive batches and
-  USB/BT callbacks already avoid the old in-callback teardown patterns.
-- `src/usb.cpp` implements companion bridge-only USB topology plus
-  intentional reconnect transitions and persona switching; replacing
-  this function with the older keep-attached shortcut would bypass
-  this logic.
+- Relocate the Waveshare BTstack TLV flash banks to
+  `PICO_FLASH_BANK_STORAGE_OFFSET=0x003FD000`, below the top of the advertised
+  16 MiB device. The preceding sectors remain available for the current
+  bootloader authorization and Wake-on-LAN persistence layout.
+- Declare the Waveshare board's 16 MiB flash size through
+  `pico_board_cmake_set_default(PICO_FLASH_SIZE_BYTES, ...)`, in addition to
+  the C preprocessor fallback.
+- Expose the on-board LED2 on GPIO23 (distinct from the CYW43-driven LED1).
 
-The older PR's additional SET_REPORT queue is not imported in this
-first adaptation, because the current output path has changed and a
-parallel queue needs performance/correctness validation in all host
-personas, particularly Edge native haptics and Xbox emulation.
+All changes are gated by `WAVESHARE_RP2350B_PLUS_W_BUILD` or reside in its
+board-specific header. Pico 2 W's flash layout is not altered.
 
-## Flash compatibility warning
-The bank offset moves **paired controller keys** from the upper 16 MiB
-region to the lower 4 MiB region. Previously paired controllers may
-need to be paired again. On the current firmware, the two sectors
-immediately below the TLV bank are reserved for other persistent data:
-`PICO_FLASH_BANK_STORAGE_OFFSET - FLASH_SECTOR_SIZE` is bootloader
-authorization; the two preceding sectors are Wake-on-LAN storage.
-The relative layout remains unchanged when the bank offset moves.
+## Why this PR does not cherry-pick the USB code from #118
 
-## Hardware validation
-Upstream author reported physical Waveshare tests; this adapted branch
-has not yet been tested on the user's board. Check Bluetooth pairing,
-re-pairing, normal reboot, USB identity, Edge feature reports, sound,
-adaptive triggers, OLED if enabled, and keys surviving a cold restart.
+The original PR was written against an earlier USB/Bluetooth implementation.
+The current main branch includes controller type detection for DualSense Edge,
+multiple host personas, a management-only USB topology, and explicit
+descriptor/endpoint re-enumeration. Replacing the present USB transport
+transition logic with the earlier keep-attached shortcut would bypass these
+policies.
+
+The current feature report cache is already fixed-size
+(`std::array<feature_cache_entry>` with `ds5::InlineBytes`), and
+`bt_copy_feature_data()` avoids the old `std::vector` allocation in
+`GET_REPORT`. However, the current `GET_REPORT` callback **can still enqueue
+Bluetooth control work**, and the `SET_REPORT` callback still processes some
+output synchronously. The callback-deferral changes from #118 have **not**
+been incorporated or proved equivalent. They merit a separate review and
+performance/regression tests against the current output, audio and persona
+paths; they are deliberately outside the scope of this hardware-only PR.
+
+## Compatibility and verification
+
+Changing the TLV bank address relocates persisted Bluetooth link keys. A
+previously paired controller may need to be paired again.
+
+- [x] Firmware CI: Pico 2 W and Waveshare RP2350B-Plus-W build targets
+- [x] Companion CI: existing checks (not modified by this PR)
+- [x] Hardware-tested in the cumulative integration firmware on a real
+      Waveshare RP2350B-Plus-W, per the downstream tester
+- [ ] Separately test this standalone branch: pairing, power-cycle,
+      Bluetooth key persistence, native haptics and USB audio
+
+The upstream author also reported hardware validation of the original
+PR #118; it does not replace validation of this narrower adaptation.

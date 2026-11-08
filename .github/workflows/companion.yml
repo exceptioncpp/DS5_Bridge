@@ -30,9 +30,10 @@ jobs:
         with:
           dotnet-version: 9.0.x
 
-      - name: Install companion dependencies
+      - name: Install companion dependencies (retry Electron download)
+        shell: pwsh
         working-directory: companion
-        run: npm ci
+        run: ../tools/ci/npm-ci-retry.ps1
 
       - name: Build audio helper
         working-directory: companion

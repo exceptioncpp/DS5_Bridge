@@ -281,6 +281,7 @@
     "Disable haptics": "Wyłącz efekty dotykowe",
     "Disable headphones": "Wyłącz słuchawki",
     "Disable microphone": "Wyłącz mikrofon",
+    "Disable power off on dock": "Wyłącz automatyczne wyłączanie w stacji",
     "Disable rumble": "Wyłącz wibracje",
     "Disable speaker": "Wyłącz głośnik",
     "Disable Trigger Lab": "Wyłącz laboratorium spustów",
@@ -295,6 +296,7 @@
     "Disconnected": "Rozłączono",
     "Discord": "Discord",
     "discord invite help server": "discord zaproszenie pomoc serwer",
+    "dock cradle contact charging auto power off disable": "stacja podstawka styki ładowanie automatyczne wyłączanie wyłącz",
     "Double-click to create a custom color": "Kliknij dwukrotnie, aby utworzyć własny kolor",
     "Down": "Dół",
     "Down Arrow": "Strzałka w dół",
@@ -450,6 +452,7 @@
     "Intensity": "Intensywność",
     "interrupt handling": "obsługa przerwań",
     "Joining Wi-Fi": "Łączenie z Wi-Fi",
+    "Keep the controller on when placed on a contact charging dock (power-off is enabled by default)": "Pozostaw kontroler włączony po umieszczeniu w stacji ładowania stykowego (domyślnie wyłączanie jest włączone)",
     "Key": "Klawisz",
     "Keyboard Key": "Klawisz klawiatury",
     "Keyboard modifiers": "Modyfikatory klawiatury",
@@ -970,9 +973,6 @@
     "Xbox": "Xbox",
     "Xbox Series X Mode": "Tryb Xbox Series X",
     "Yellow": "Żółty",
-    "Your purchase supports the developer of DS5 Bridge.": "Twój zakup wspiera twórcę DS5 Bridge.",
-    "Disable power off on dock": "Wyłącz automatyczne wyłączanie w stacji",
-    "Keep the controller on when placed on a contact charging dock (power-off is enabled by default)": "Pozostaw kontroler włączony po umieszczeniu w stacji ładowania stykowego (domyślnie wyłączanie jest włączone)",
-    "dock cradle contact charging auto power off disable": "stacja podstawka styki ładowanie automatyczne wyłączanie wyłącz"
+    "Your purchase supports the developer of DS5 Bridge.": "Twój zakup wspiera twórcę DS5 Bridge."
   }
 }

@@ -213,6 +213,7 @@ export const DEFAULT_SETTINGS: CompanionSettings = {
   ledEnabled: true,
   playerLedEnabled: true,
   idleDisconnectEnabled: true,
+  disableDockPowerOff: false,
   idleDisconnectTimeoutMinutes: 15,
   usbSuspendDisconnectEnabled: true,
   wakeOnConnectEnabled: true,
@@ -1088,6 +1089,9 @@ function normalizeSettings(value: Partial<CompanionSettings> | null | undefined)
     idleDisconnectEnabled: typeof value?.idleDisconnectEnabled === 'boolean'
       ? value.idleDisconnectEnabled
       : DEFAULT_SETTINGS.idleDisconnectEnabled,
+    disableDockPowerOff: typeof value?.disableDockPowerOff === 'boolean'
+      ? value.disableDockPowerOff
+      : DEFAULT_SETTINGS.disableDockPowerOff,
     idleDisconnectTimeoutMinutes: Number.isFinite(value?.idleDisconnectTimeoutMinutes)
       ? Math.max(1, Math.min(120, Math.round(value!.idleDisconnectTimeoutMinutes!)))
       : DEFAULT_SETTINGS.idleDisconnectTimeoutMinutes,

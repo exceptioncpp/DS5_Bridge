@@ -11,6 +11,7 @@
 #include "controller_input_delivery_queue.h"
 #include "controller_input_receive_batch.h"
 #include "controller_packet_compositor.h"
+#include "dock_power_off.h"
 #include "controller_output_policy.h"
 #include "controller_output_submit.h"
 #include "utils.h"
@@ -30,6 +31,9 @@
 #include "persona/xusb360_usb.h"
 #include "runtime_fail_fast.h"
 #include "watchdog_telemetry.h"
+#ifdef ENABLE_OLED
+#include "oled_status.h"
+#endif
 #include "hardware/clocks.h"
 #include "hardware/vreg.h"
 #include "hardware/watchdog.h"
@@ -45,6 +49,28 @@
 #include "pico/critical_section.h"
 
 int reportSeqCounter = 0;
+
+// Input decoding, Companion commands and this timer run on core 0.
+static ds5::dock::PowerOffDetector g_dock_detector{};
+static bool g_disable_dock_power_off = false;
+
+void dock_power_off_set_disabled(bool disabled) {
+    g_disable_dock_power_off = disabled;
+    if (disabled) g_dock_detector.reset();
+}
+
+bool dock_power_off_disabled() { return g_disable_dock_power_off; }
+
+static void dock_power_off_poll() {
+    if (!bt_is_controller_connected() || g_disable_dock_power_off) {
+        g_dock_detector.reset();
+        return;
+    }
+    if (g_dock_detector.take_power_off(time_us_32())) {
+        DS5_LOG("[Dock] confirmed, sending controller power-off request\n");
+        (void)bt_power_off_controller();
+    }
+}
 static constexpr uint32_t HOST_LIGHTBAR_RESTORE_DELAY_MS = 3000;
 static constexpr uint32_t HOST_PERSONA_SWITCH_INPUT_FALLBACK_US = 3'000'000;
 
@@ -607,6 +633,10 @@ static __attribute__((noinline, noclone)) void __not_in_flash_func(process_contr
     }
     uint8_t controller_report[sizeof(packet.report)];
     memcpy(controller_report, packet.report, sizeof(controller_report));
+    // Sony report byte 53 bit 6: DockDetect; separate from battery charging.
+    if (!g_disable_dock_power_off) {
+        g_dock_detector.observe((controller_report[53] & 0x40u) != 0, time_us_32());
+    }
     set_headset((controller_report[53] & 1) != 0);
 #ifdef ENABLE_COMPANION
     companion_process_controller_report(controller_report, sizeof(controller_report));
@@ -967,6 +997,9 @@ int main() {
     bt_init();
     bt_register_data_callback(on_bt_data);
     wake_on_lan_init();
+#ifdef ENABLE_OLED
+    oled_status_init();
+#endif
 
     watchdog_enable(1000, true);
 
@@ -979,6 +1012,7 @@ int main() {
         watchdog_update();
         RUN_MAIN_PHASE(WatchdogMainLoopPhase::Cyw43, {
             poll_bluetooth_once();
+            dock_power_off_poll();
         });
         RUN_MAIN_PHASE(WatchdogMainLoopPhase::InterruptAfterCyw43, {
             interrupt_loop();
@@ -1038,6 +1072,11 @@ int main() {
         RUN_MAIN_PHASE(WatchdogMainLoopPhase::Button, {
             button_check();
         });
+#ifdef ENABLE_OLED
+        RUN_MAIN_PHASE(WatchdogMainLoopPhase::Oled, {
+            oled_status_loop(interrupt_in_state.battery_percent);
+        });
+#endif
         if (!wake_on_lan_quiet_gate()) {
             RUN_MAIN_PHASE(WatchdogMainLoopPhase::Lightbar, {
                 bt_lightbar_loop();

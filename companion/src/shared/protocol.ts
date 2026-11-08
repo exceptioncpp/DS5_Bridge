@@ -107,6 +107,7 @@ export const COMMAND_ID = {
   SET_LIGHTBAR_RESTORE_ENABLED: 0x36,
   SET_RADIAL_DEADZONES: 0x37,
   SET_EDGE_PROFILE_SWITCHING_BLOCKED: 0x45,
+  DISABLE_DOCK_POWER_OFF: 0x46,
   BOOTLOADER_AUTH_ENROLL_BEGIN: 0x50,
   BOOTLOADER_AUTH_ENROLL_COMMIT: 0x51,
   BOOTLOADER_AUTH_CHALLENGE: 0x52,
@@ -791,7 +792,7 @@ export const RESET_EVIDENCE_PHASES = [
   'lightbar', 'rssi', 'inquiry', 'connection-recovery', 'feature-prefetch', 'output-retry',
   'companion', 'interrupt-after-companion', 'firmware-log-flush', 'cyw43-second',
   'interrupt-after-cyw43', 'wake-on-lan', 'wifi-start', 'wifi-join', 'wifi-send', 'wifi-stop',
-  'wake-on-lan-storage'
+  'wake-on-lan-storage', 'oled'
 ] as const;
 export const RESET_EVIDENCE_REASONS = [
   'watchdog-timeout', 'panic', 'out-of-memory', 'codec-fatal', 'audio-stack-overflow',

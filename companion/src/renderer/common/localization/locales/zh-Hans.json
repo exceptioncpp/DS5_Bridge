@@ -281,6 +281,7 @@
     "Disable haptics": "禁用触觉反馈",
     "Disable headphones": "禁用耳机",
     "Disable microphone": "禁用麦克风",
+    "Disable power off on dock": "禁用充电底座自动关机",
     "Disable rumble": "禁用振动",
     "Disable speaker": "禁用扬声器",
     "Disable Trigger Lab": "禁用扳机实验室",
@@ -295,6 +296,7 @@
     "Disconnected": "已断开连接",
     "Discord": "Discord",
     "discord invite help server": "Discord 邀请 帮助 服务器",
+    "dock cradle contact charging auto power off disable": "充电底座 触点 充电 自动关机 禁用",
     "Double-click to create a custom color": "双击以创建自定义颜色",
     "Down": "下",
     "Down Arrow": "向下箭头",
@@ -450,6 +452,7 @@
     "Intensity": "强度",
     "interrupt handling": "中断处理",
     "Joining Wi-Fi": "正在连接 Wi-Fi",
+    "Keep the controller on when placed on a contact charging dock (power-off is enabled by default)": "放入触点式充电底座时保持控制器开启（默认启用自动关机）",
     "Key": "键",
     "Keyboard Key": "键盘按键",
     "Keyboard modifiers": "键盘修饰键",
@@ -970,9 +973,6 @@
     "Xbox": "Xbox",
     "Xbox Series X Mode": "Xbox Series X 模式",
     "Yellow": "黄色",
-    "Your purchase supports the developer of DS5 Bridge.": "你的购买将支持 DS5 Bridge 的开发者。",
-    "Disable power off on dock": "禁用充电底座自动关机",
-    "Keep the controller on when placed on a contact charging dock (power-off is enabled by default)": "放入触点式充电底座时保持控制器开启（默认启用自动关机）",
-    "dock cradle contact charging auto power off disable": "充电底座 触点 充电 自动关机 禁用"
+    "Your purchase supports the developer of DS5 Bridge.": "你的购买将支持 DS5 Bridge 的开发者。"
   }
 }

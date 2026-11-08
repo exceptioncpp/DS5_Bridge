@@ -11,7 +11,7 @@ This is **not** equivalent to the battery charging state or USB-C power.
   disconnection, or when the option is turned off. It emits at most one shutdown
   request for each continuous dock.
 - Companion: **Settings → Connection & Power → Power off on charging dock**.
-  Enable the switch to prevent automatic shutdown.
+  Turn the switch ON to power off the controller when docked, or OFF to keep it powered on.
 - This enabled-by-default preference is saved by **Companion on the PC** and reapplied when it
   reconnects to the bridge, consistent with existing Companion settings.
   The controller normally powers off **without Companion running**.
@@ -37,5 +37,5 @@ This is **not** equivalent to the battery charging state or USB-C power.
 6. Turn the setting ON to restore automatic power-off.
 
 The original awalol/DS5Dongle disconnects the Bluetooth link on docking.
-This fork uses `bt_power_off_controller()` instead to prevent automatic
+This implementation uses `bt_power_off_controller()` instead to prevent automatic
 reconnection while still docked.

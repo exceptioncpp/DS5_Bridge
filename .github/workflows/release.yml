@@ -202,9 +202,10 @@ jobs:
             throw 'TinyUSB revision mismatch.'
           }
 
-      - name: Install companion dependencies
+      - name: Install companion dependencies (retry Electron download)
+        shell: pwsh
         working-directory: companion
-        run: npm ci
+        run: ../tools/ci/npm-ci-retry.ps1
 
       - name: Apply companion prerelease version
         if: env.RELEASE_BUILD_VERSION != ''

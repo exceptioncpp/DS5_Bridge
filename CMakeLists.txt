@@ -39,6 +39,7 @@ if (EXISTS ${picoVscode})
 endif ()
 # ====================================================================================
 option(WAVESHARE_RP2350B_PLUS_W_BUILD "Build for Waveshare RP2350B-Plus-W (USB-C, 16MB flash, RM2 wireless)" OFF)
+option(ENABLE_OLED "Enable SPI SH1107 Waveshare Pico-OLED-1.3 status screen" OFF)
 
 if (WAVESHARE_RP2350B_PLUS_W_BUILD)
     set(PICO_BOARD waveshare_rp2350b_plus_w CACHE STRING "Board type")
@@ -591,6 +592,14 @@ target_compile_definitions(ds5-bridge PRIVATE
         DS5_FIRMWARE_VERSION_MINOR=${DS5_FIRMWARE_VERSION_MINOR}
         DS5_FIRMWARE_VERSION_PATCH=${DS5_FIRMWARE_VERSION_PATCH}
 )
+# Hardware-tested flash layout adapted from SundayMoments/DS5_Bridge#118.
+if(WAVESHARE_RP2350B_PLUS_W_BUILD)
+    target_compile_definitions(ds5-bridge PRIVATE
+        DS5_WAVESHARE_STABLE_FLASH=1
+        PICO_FLASH_BANK_STORAGE_OFFSET=0x003FD000
+    )
+endif()
+
 option(ENABLE_COMPANION "Enable the optional companion HID interface" OFF)
 if(ENABLE_COMPANION)
     target_sources(ds5-bridge PRIVATE
@@ -610,6 +619,13 @@ if(ENABLE_COMPANION)
     # Bootloader authorization: HMAC-SHA256 on the RP2350 SHA block and a
     # flash-backed enrollment record.
     target_link_libraries(ds5-bridge pico_sha256 pico_flash hardware_flash)
+endif()
+
+# The SH1107 screen is compile-time optional, not present in normal builds.
+if(ENABLE_OLED)
+    target_sources(ds5-bridge PRIVATE src/oled_status.cpp)
+    target_link_libraries(ds5-bridge hardware_spi)
+    target_compile_definitions(ds5-bridge PRIVATE ENABLE_OLED=1)
 endif()
 
 # Diagnostics live in one place. Quick presets:

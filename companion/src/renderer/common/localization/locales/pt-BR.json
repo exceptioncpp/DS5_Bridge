@@ -281,6 +281,7 @@
     "Disable haptics": "Desativar resposta tátil",
     "Disable headphones": "Desativar fones de ouvido",
     "Disable microphone": "Desativar microfone",
+    "Disable power off on dock": "Desativar desligamento ao colocar na base",
     "Disable rumble": "Desativar vibração",
     "Disable speaker": "Desativar alto-falante",
     "Disable Trigger Lab": "Desativar Laboratório de gatilhos",
@@ -295,6 +296,7 @@
     "Disconnected": "Desconectado",
     "Discord": "Discord",
     "discord invite help server": "discord convite ajuda servidor",
+    "dock cradle contact charging auto power off disable": "base suporte contato carregamento desligamento automático desativar",
     "Double-click to create a custom color": "Clique duas vezes para criar uma cor personalizada",
     "Down": "Para baixo",
     "Down Arrow": "Seta para baixo",
@@ -450,6 +452,7 @@
     "Intensity": "Intensidade",
     "interrupt handling": "o tratamento de interrupções",
     "Joining Wi-Fi": "Conectando ao Wi-Fi",
+    "Keep the controller on when placed on a contact charging dock (power-off is enabled by default)": "Manter o controle ligado ao colocá-lo em uma base de carregamento por contatos (o desligamento é ativado por padrão)",
     "Key": "Tecla",
     "Keyboard Key": "Tecla do teclado",
     "Keyboard modifiers": "Modificadores do teclado",
@@ -970,9 +973,6 @@
     "Xbox": "Xbox",
     "Xbox Series X Mode": "Modo Xbox Series X",
     "Yellow": "Amarelo",
-    "Your purchase supports the developer of DS5 Bridge.": "Sua compra apoia o desenvolvedor do DS5 Bridge.",
-    "Disable power off on dock": "Desativar desligamento ao colocar na base",
-    "Keep the controller on when placed on a contact charging dock (power-off is enabled by default)": "Manter o controle ligado ao colocá-lo em uma base de carregamento por contatos (o desligamento é ativado por padrão)",
-    "dock cradle contact charging auto power off disable": "base suporte contato carregamento desligamento automático desativar"
+    "Your purchase supports the developer of DS5 Bridge.": "Sua compra apoia o desenvolvedor do DS5 Bridge."
   }
 }

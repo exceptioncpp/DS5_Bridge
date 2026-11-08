@@ -34,7 +34,7 @@ function baseModel(overrides: Partial<SettingsPageModel> = {}): SettingsPageMode
       ledEnabled: true,
       playerLedEnabled: true,
       idleDisconnectEnabled: true,
-      disableDockPowerOff: false,
+      powerOffOnDock: true,
       idleDisconnectTimeoutMinutes: 15,
       usbSuspendDisconnectEnabled: true,
       wakeOnConnectEnabled: true,
@@ -66,7 +66,7 @@ function createActions(): SettingsPageActions & Record<string, ReturnType<typeof
     'setTheme', 'setUiScale', 'setTextScale', 'setLocale', 'toggleLaunchAtStartup', 'toggleBatteryTrayIcon',
     'toggleCloseButtonQuits', 'toggleControllerNotifications', 'toggleLowBatteryNotifications',
     'togglePersonaNotifications', 'toggleMicMuteNotifications', 'setIdleDisconnectTimeout',
-    'toggleIdleDisconnect', 'toggleDisableDockPowerOff', 'toggleUsbSuspendDisconnect', 'toggleControllerPowerSaving', 'toggleLed', 'togglePlayerLed',
+    'toggleIdleDisconnect', 'togglePowerOffOnDock', 'toggleUsbSuspendDisconnect', 'toggleControllerPowerSaving', 'toggleLed', 'togglePlayerLed',
     'toggleLightbarRestore', 'toggleEdgeProfileSwitching', 'toggleSleepShortcut', 'toggleVolumeShortcut',
     'toggleWakeOnConnect', 'mountPicoBootloader', 'flashPicoFirmware', 'nukePicoFlash', 'openExternal'
   ];
@@ -154,7 +154,7 @@ describe('Settings page', () => {
       ['Notifications', 'Low Battery', 'toggleLowBatteryNotifications'],
       ['Notifications', 'Host Controller Switch', 'togglePersonaNotifications'],
       ['Notifications', 'Mic Mute', 'toggleMicMuteNotifications'],
-      ['Connection & Power', 'Disable power off on dock', 'toggleDisableDockPowerOff'],
+      ['Connection & Power', 'Power off on charging dock', 'togglePowerOffOnDock'],
       ['Connection & Power', 'PC Sleep Disconnect', 'toggleUsbSuspendDisconnect'],
       ['Connection & Power', 'Controller Power Saving', 'toggleControllerPowerSaving'],
       ['Lights & Indicators', 'Bridge LED', 'toggleLed'],

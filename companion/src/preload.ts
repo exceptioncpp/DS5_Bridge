@@ -148,7 +148,7 @@ const api = {
     ipcRenderer.invoke('bridge:setLightbarRestoreEnabled', value)
   ),
   setIdleDisconnectEnabled: (value: boolean): Promise<BridgeSnapshot> => ipcRenderer.invoke('bridge:setIdleDisconnectEnabled', value),
-  setDisableDockPowerOff: (value: boolean): Promise<BridgeSnapshot> => ipcRenderer.invoke('bridge:setDisableDockPowerOff', value),
+  setPowerOffOnDock: (value: boolean): Promise<BridgeSnapshot> => ipcRenderer.invoke('bridge:setPowerOffOnDock', value),
   setIdleDisconnectTimeoutMinutes: (value: number): Promise<BridgeSnapshot> => (
     ipcRenderer.invoke('bridge:setIdleDisconnectTimeoutMinutes', value)
   ),

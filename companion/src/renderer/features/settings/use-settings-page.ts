@@ -116,8 +116,8 @@ export function useSettingsPage(runtime: AppRuntime, { notifications }: Settings
     )),
     setIdleDisconnectTimeout: (minutes) => void runAction('idle-timeout', () => window.bridge.setIdleDisconnectTimeoutMinutes(minutes)),
     toggleIdleDisconnect: toggle('idle', (settings) => window.bridge.setIdleDisconnectEnabled(!settings.idleDisconnectEnabled)),
-    toggleDisableDockPowerOff: toggle('dock-power-off', (settings) => (
-      window.bridge.setDisableDockPowerOff(!settings.disableDockPowerOff)
+    togglePowerOffOnDock: toggle('dock-power-off', (settings) => (
+      window.bridge.setPowerOffOnDock(!settings.powerOffOnDock)
     )),
     toggleUsbSuspendDisconnect: toggle('usb-suspend', (settings) => (
       window.bridge.setUsbSuspendDisconnectEnabled(!settings.usbSuspendDisconnectEnabled)

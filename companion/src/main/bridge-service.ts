@@ -2868,9 +2868,9 @@ export class BridgeService extends EventEmitter {
     return this.getSnapshot();
   }
 
-  async setDisableDockPowerOff(disabled: boolean): Promise<BridgeSnapshot> {
-    await this.sendSettingCommand(COMMAND_ID.DISABLE_DOCK_POWER_OFF, disabled ? 1 : 0, {
-      disableDockPowerOff: disabled
+  async setPowerOffOnDock(enabled: boolean): Promise<BridgeSnapshot> {
+    await this.sendSettingCommand(COMMAND_ID.DISABLE_DOCK_POWER_OFF, enabled ? 0 : 1, {
+      powerOffOnDock: enabled
     });
     return this.getSnapshot();
   }
@@ -4622,7 +4622,7 @@ export class BridgeService extends EventEmitter {
     await this.sendCommand(COMMAND_ID.SET_IDLE_DISCONNECT_ENABLED, settings.idleDisconnectEnabled ? 1 : 0, {
       expectSettingsRevisionChange
     });
-    await this.sendCommand(COMMAND_ID.DISABLE_DOCK_POWER_OFF, settings.disableDockPowerOff ? 1 : 0, {
+    await this.sendCommand(COMMAND_ID.DISABLE_DOCK_POWER_OFF, settings.powerOffOnDock ? 0 : 1, {
       expectSettingsRevisionChange
     });
     await this.sendCommand(COMMAND_ID.SET_IDLE_DISCONNECT_TIMEOUT, settings.idleDisconnectTimeoutMinutes, {

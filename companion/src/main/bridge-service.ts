@@ -2868,6 +2868,13 @@ export class BridgeService extends EventEmitter {
     return this.getSnapshot();
   }
 
+  async setDisableDockPowerOff(disabled: boolean): Promise<BridgeSnapshot> {
+    await this.sendSettingCommand(COMMAND_ID.DISABLE_DOCK_POWER_OFF, disabled ? 1 : 0, {
+      disableDockPowerOff: disabled
+    });
+    return this.getSnapshot();
+  }
+
   private async dispatchInputShortcutAction(event: InputShortcutEvent): Promise<void> {
     if (event.kind === 'chord-function') {
       await this.dispatchChordFunctionSlot(event.slot);
@@ -4613,6 +4620,9 @@ export class BridgeService extends EventEmitter {
       expectSettingsRevisionChange
     });
     await this.sendCommand(COMMAND_ID.SET_IDLE_DISCONNECT_ENABLED, settings.idleDisconnectEnabled ? 1 : 0, {
+      expectSettingsRevisionChange
+    });
+    await this.sendCommand(COMMAND_ID.DISABLE_DOCK_POWER_OFF, settings.disableDockPowerOff ? 1 : 0, {
       expectSettingsRevisionChange
     });
     await this.sendCommand(COMMAND_ID.SET_IDLE_DISCONNECT_TIMEOUT, settings.idleDisconnectTimeoutMinutes, {

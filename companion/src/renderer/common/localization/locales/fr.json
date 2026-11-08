@@ -970,6 +970,9 @@
     "Xbox": "Xbox",
     "Xbox Series X Mode": "Mode Xbox Series X",
     "Yellow": "Jaune",
-    "Your purchase supports the developer of DS5 Bridge.": "Votre achat soutient le développeur de DS5 Bridge."
+    "Your purchase supports the developer of DS5 Bridge.": "Votre achat soutient le développeur de DS5 Bridge.",
+    "Disable power off on dock": "Désactiver l’arrêt sur la station de charge",
+    "Keep the controller on when placed on a contact charging dock (power-off is enabled by default)": "Garder la manette allumée lorsqu’elle est placée sur une station de charge à contacts (l’arrêt est activé par défaut)",
+    "dock cradle contact charging auto power off disable": "station socle contact charge arrêt automatique désactiver"
   }
 }
